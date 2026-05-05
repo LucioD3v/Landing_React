@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Logo from '../../assets/Logo.png'
 
 const navbarlinks = [
@@ -40,6 +40,13 @@ const navbarRedes = [
 ]
 
 const Navbar = () => {
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen)
+  }
+
   return (
     <nav>
       <div className='flex justify-between items-center sm:px-12 sm:py-6 px-4 py-3'>
@@ -49,8 +56,35 @@ const Navbar = () => {
           <img src={Logo} alt='Logo del Sitio' className='w-[100px]'/>  
         </div>
 
-         {/* Navegacion Desktop */}
-        <div>
+        {/* Boton de Hamburguesa */}
+        <button onClick={toggleMenu} className="md:hidden text-white">
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://w3.org" // Opcional pero recomendado
+          >
+            {isOpen ? (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            ) : (
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            )}
+          </svg>
+      </button>
+      
+        {/* Navegacion Desktop */}
+        <div className='hidden md:block'>
           <ul className='flex sm:space-x-8 space-x-4'>
             {navbarlinks.map((link)=> (
               <li key={link.id}>
@@ -64,7 +98,9 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <div>
+
+        {/* Navegacion redes desktop */}
+        <div className='hidden md:block'>
           <ul className='flex space-x-4'>
              {navbarRedes.map((link)=> (
               <li key={link.id}>
