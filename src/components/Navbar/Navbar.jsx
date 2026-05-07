@@ -82,7 +82,7 @@ const Navbar = () => {
             )}
           </svg>
       </button>
-      
+
         {/* Navegacion Desktop */}
         <div className='hidden md:block'>
           <ul className='flex sm:space-x-8 space-x-4'>
@@ -120,6 +120,40 @@ const Navbar = () => {
         </div>
 
       </div>
+
+        {/* Menu Movil */}  
+        <div className={`'md:hidden absolute w-full bg-purple-950 transition-all duration-300
+          ${isOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}>
+           <ul className="flex flex-col px-4 py-2">
+             {navbarlinks.map((link)=> (
+              <li key={link.id} className="py-2 text-center">
+                <a className="text-white hover:text-sky-200" href={link.link} onClick={() => setIsOpen(false)}>
+                  {link.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <ul className='flex space-x-4 px-4 py-2 border-t border-purple-700 justify-center'>
+             {navbarRedes.map((link)=> (
+              <li key={link.id}>
+                <a 
+                target='_blank'
+                rel='noopener noreferrer'
+                className='inline-block'
+                href={link.link}
+                onClick={() => setIsOpen(false)}
+                >
+                  <i 
+                  className={`${link.icon} text-lg text-white hover:text-sky-200`}>
+                  </i>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+
     </nav>
   )
 }
